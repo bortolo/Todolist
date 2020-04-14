@@ -3,6 +3,8 @@ var session = require('cookie-session'); // Loads the piece of middleware for se
 var bodyParser = require('body-parser'); // Loads the piece of middleware for managing the settings
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
+var request = require('request');
+
 var app = express();
 
 
@@ -39,6 +41,16 @@ we create an empty one in the form of an array before continuing */
         req.session.todolist.splice(req.params.id, 1);
     }
     res.redirect('/todo');
+})
+
+/* Call backend server */
+.get('/todo/callserver', function(req, res) {
+  request('http://test.mydomain.com:8080/HelloWorldServlet/HelloWorld', function(err, response, body) {
+      console.log('statusCode:', response && response.statusCode);
+      console.log(body);
+      req.session.todolist.push(body);
+      res.redirect('/todo');
+  });
 })
 
 /* Redirects to the to do list if the page requested is not found */
