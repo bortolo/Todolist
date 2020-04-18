@@ -8,6 +8,9 @@
         "express": "~4.11.0",
         "request": "^2.88.2"
     },
+    "scripts": {
+        "start": "node app.js"
+    },
     "author": "Andrea <andrea.bortolossi89@gmail.com>",
     "description": "A very basic to do list manager"
 }
