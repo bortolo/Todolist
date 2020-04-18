@@ -1,3 +1,5 @@
+const port = process.env.NODE_PORT || 8081;
+
 var express = require('express');
 var session = require('cookie-session'); // Loads the piece of middleware for sessions
 var bodyParser = require('body-parser'); // Loads the piece of middleware for managing the settings
@@ -58,4 +60,4 @@ we create an empty one in the form of an array before continuing */
     res.redirect('/todo');
 })
 
-.listen(8081);
+.listen(port);
