@@ -1,4 +1,5 @@
 const port = process.env.NODE_PORT || 8081;
+// https://nodesource.com/blog/running-your-node-js-app-with-systemd-part-1/
 
 var express = require('express');
 var session = require('cookie-session'); // Loads the piece of middleware for sessions
@@ -9,6 +10,8 @@ var request = require('request');
 
 var app = express();
 
+app.set('views', './views');
+app.set('view engine', 'ejs');
 
 
 /* Using sessions */
@@ -26,7 +29,7 @@ we create an empty one in the form of an array before continuing */
 
 /* The to do list and the form are displayed */
 .get('/todo', function(req, res) {
-    res.render('todo.ejs', {todolist: req.session.todolist});
+    res.render('todo', {todolist: req.session.todolist});
 })
 
 /* Adding an item to the to do list */
