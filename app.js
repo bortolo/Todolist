@@ -49,8 +49,9 @@ we create an empty one in the form of an array before continuing */
 })
 
 /* Call backend server */
+//'http://test.mydomain.com:8080/HelloWorldServlet/HelloWorld'
 .get('/todo/callserver', function(req, res) {
-  request('http://test.mydomain.com:8080/HelloWorldServlet/HelloWorld', function(err, response, body) {
+  request('http://test.mydomain.com:8080/my-real-app-war/HelloWorld', function(err, response, body) {
       console.log('statusCode:', response && response.statusCode);
       console.log(body);
       req.session.todolist.push(body);
