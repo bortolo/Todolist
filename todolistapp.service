@@ -1,6 +1,5 @@
 [Unit]
 Description=app.js - todolist app
-Documentation=https://example.com
 After=network.target
 
 [Service]
@@ -8,6 +7,7 @@ Environment=NODE_PORT=8081
 Type=simple
 WorkingDirectory=/home/myadmin/todolistapp
 User=myadmin
+Group=myadmin
 ExecStart=/usr/bin/node app.js
 Restart=on-failure
 
