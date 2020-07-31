@@ -60,6 +60,24 @@ we create an empty one in the form of an array before continuing */
   });
 })
 
+.get('/todo/filldb', function(req, res) {
+  request('http://test.mydomain.com:8080/my-real-app-war/PopulateDb', function(err, response, body) {
+      console.log('statusCode:', response && response.statusCode);
+      console.log(body);
+      req.session.todolist.push(body);
+      res.redirect('/todo');
+  });
+})
+
+.get('/todo/additem', function(req, res) {
+  request('http://test.mydomain.com:8080/my-real-app-war/InsertActor', function(err, response, body) {
+      console.log('statusCode:', response && response.statusCode);
+      console.log(body);
+      req.session.todolist.push(body);
+      res.redirect('/todo');
+  });
+})
+
 /* Redirects to the to do list if the page requested is not found */
 .use(function(req, res, next){
     res.redirect('/todo');
