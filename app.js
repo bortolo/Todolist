@@ -1,4 +1,6 @@
 const port = process.env.NODE_PORT || 8081;
+const app_address = process.env.NODE_APP_ADDRESS || "test.mydomain.com";
+const app_port = process.env.NODE_APP_PORT || 8080;
 // https://nodesource.com/blog/running-your-node-js-app-with-systemd-part-1/
 
 var express = require('express');
@@ -49,10 +51,10 @@ we create an empty one in the form of an array before continuing */
 })
 
 /* Call backend server */
-//'http://test.mydomain.com:8080/HelloWorldServlet/HelloWorld'
+//'http://127.0.0.1:8080/HelloWorldServlet/HelloWorld'
 //'http://test.mydomain.com:8080/my-real-app-war/HelloWorld'
 .get('/todo/callserver', function(req, res) {
-  request('http://test.mydomain.com:8080/my-real-app-war/HelloWorld', function(err, response, body) {
+  request('http://'+app_address+':'+app_port+'/my-real-app-war/HelloWorld', function(err, response, body) {
       console.log('statusCode:', response && response.statusCode);
       console.log(body);
       req.session.todolist.push(body);
@@ -61,7 +63,7 @@ we create an empty one in the form of an array before continuing */
 })
 
 .get('/todo/filldb', function(req, res) {
-  request('http://test.mydomain.com:8080/my-real-app-war/PopulateDb', function(err, response, body) {
+  request('http://'+app_address+':'+app_port+'/my-real-app-war/PopulateDb', function(err, response, body) {
       console.log('statusCode:', response && response.statusCode);
       console.log(body);
       req.session.todolist.push(body);
@@ -70,7 +72,7 @@ we create an empty one in the form of an array before continuing */
 })
 
 .get('/todo/additem', function(req, res) {
-  request('http://test.mydomain.com:8080/my-real-app-war/InsertActor', function(err, response, body) {
+  request('http://'+app_address+':'+app_port+'/my-real-app-war/InsertActor', function(err, response, body) {
       console.log('statusCode:', response && response.statusCode);
       console.log(body);
       req.session.todolist.push(body);
